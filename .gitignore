@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Production builds
+/.next/
+/out/
+/build
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache
+.npm
+.eslintcache
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime configuration
+.env*.local
+.env
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
