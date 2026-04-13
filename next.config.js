@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    // Enable Server Components
-    serverComponentsExternalPackages: ['cheerio'],
-  },
+  // Updated from experimental to main config option
+  serverExternalPackages: ['cheerio'],
 }
 
 module.exports = nextConfig

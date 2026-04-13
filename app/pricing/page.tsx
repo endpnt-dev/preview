@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { Globe, ArrowLeft, Check, Zap, Shield, Globe2 } from 'lucide-react'
+import PricingTable from '@/components/PricingTable'
 
 export default function PricingPage() {
   const plans = [
     {
+      id: 'free',
       name: 'Free',
       price: '$0',
       period: 'forever',
@@ -15,9 +17,10 @@ export default function PricingPage() {
         'Standard support',
       ],
       cta: 'Start Free',
-      popular: false,
+      highlighted: false,
     },
     {
+      id: 'starter',
       name: 'Starter',
       price: '$9',
       period: 'month',
@@ -30,9 +33,10 @@ export default function PricingPage() {
         'Custom user agents',
       ],
       cta: 'Get Started',
-      popular: true,
+      highlighted: true,
     },
     {
+      id: 'pro',
       name: 'Pro',
       price: '$29',
       period: 'month',
@@ -46,9 +50,10 @@ export default function PricingPage() {
         'Webhook notifications',
       ],
       cta: 'Go Pro',
-      popular: false,
+      highlighted: false,
     },
     {
+      id: 'enterprise',
       name: 'Enterprise',
       price: 'Custom',
       period: 'contact us',
@@ -63,27 +68,12 @@ export default function PricingPage() {
         'On-premise deployment',
       ],
       cta: 'Contact Sales',
-      popular: false,
+      highlighted: false,
     },
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-      {/* Header */}
-      <header className="border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center text-gray-300 hover:text-white mr-4">
-                <ArrowLeft className="h-4 w-4 mr-1" />
-                Back
-              </Link>
-              <Globe className="h-8 w-8 text-blue-400" />
-              <span className="ml-2 text-xl font-bold">Pricing</span>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="bg-gray-900 text-gray-100">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
@@ -97,62 +87,15 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-gray-800 rounded-lg p-6 ${
-                plan.popular ? 'ring-2 ring-blue-400' : ''
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Most Popular
-                  </span>
-                </div>
-              )}
-
-              <div className="text-center">
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  {plan.price !== 'Custom' && (
-                    <span className="text-gray-400">/{plan.period}</span>
-                  )}
-                </div>
-                <p className="text-gray-400 text-sm mb-6">{plan.description}</p>
-              </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center text-sm">
-                    <Check className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className={`w-full py-2 px-4 rounded transition-colors ${
-                  plan.popular
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-gray-700 hover:bg-gray-600 text-gray-100'
-                }`}
-              >
-                {plan.cta}
-              </button>
-            </div>
-          ))}
-        </div>
+        <PricingTable plans={plans} className="mb-16" />
 
         {/* Features Comparison */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-center mb-8">All plans include</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Globe2 className="h-8 w-8" />
+              <div className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Globe2 className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Complete Metadata</h3>
               <p className="text-gray-400 text-sm">
@@ -161,8 +104,8 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center">
-              <div className="bg-green-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-8 w-8" />
+              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Lightning Fast</h3>
               <p className="text-gray-400 text-sm">
@@ -171,8 +114,8 @@ export default function PricingPage() {
             </div>
 
             <div className="text-center">
-              <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8" />
+              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Enterprise Security</h3>
               <p className="text-gray-400 text-sm">
@@ -222,16 +165,16 @@ export default function PricingPage() {
           <p className="text-gray-400 mb-8">
             Sign up for a free account and start extracting link previews in minutes.
           </p>
-          <div className="space-x-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/docs"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded text-lg font-semibold transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 rounded-lg text-lg font-semibold transition-all shadow-lg"
             >
               Start Free Trial
             </Link>
             <Link
               href="/docs"
-              className="inline-flex items-center px-6 py-3 border border-gray-600 hover:bg-gray-800 rounded text-lg font-semibold transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 border border-gray-600 hover:bg-gray-800 rounded-lg text-lg font-semibold transition-colors"
             >
               View Documentation
             </Link>
