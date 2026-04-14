@@ -28,12 +28,22 @@ async function handleUnfurlRequest(request: NextRequest) {
   try {
     // Auth check
     const apiKey = getApiKeyFromHeaders(request.headers)
+
+    if (!apiKey) {
+      return errorResponse(
+        'AUTH_REQUIRED',
+        getErrorMessage('AUTH_REQUIRED'),
+        401,
+        { request_id: requestId }
+      )
+    }
+
     const keyInfo = validateApiKey(apiKey)
 
     if (!keyInfo) {
       return errorResponse(
-        'AUTH_REQUIRED',
-        getErrorMessage('AUTH_REQUIRED'),
+        'INVALID_API_KEY',
+        getErrorMessage('INVALID_API_KEY'),
         401,
         { request_id: requestId }
       )

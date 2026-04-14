@@ -37,7 +37,7 @@ export default function UnfurlDemo({ className = '' }: UnfurlDemoProps) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'ek_live_demo123',
+          'x-api-key': 'ek_live_74qlNSbK5jTwq28Y',
         },
         body: JSON.stringify({ url: url.trim() }),
       })

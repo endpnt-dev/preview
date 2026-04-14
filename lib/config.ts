@@ -20,7 +20,7 @@ export const TIER_LIMITS = {
 } as const
 
 export const UNFURL_DEFAULTS = {
-  timeout: 5000,
+  timeout: 10000,
   follow_redirects: true,
   include_html: false,
   max_redirects: 5,
