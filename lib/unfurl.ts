@@ -58,7 +58,7 @@ export async function unfurlUrl(url: string, options: UnfurlOptions = {}): Promi
   const normalizedUrl = normalizeUrl(url)
   let currentUrl = normalizedUrl
   let redirectCount = 0
-  let response: Response
+  let response!: Response
   let finalUrl = currentUrl
 
   // Follow redirects manually to track count and final URL
