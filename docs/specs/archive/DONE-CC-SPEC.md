@@ -246,3 +246,15 @@ git add -A && git commit -m "feat: initial URL Preview API — endpoints, landin
 | 13 | Docs page | Visit /docs | Renders with interactive tester | |
 | 14 | Live demo | Paste URL on landing page, click Unfurl | Preview card renders with extracted data | |
 | 15 | Relative image paths | POST with URL that has og:image="/img/x.png" | Image URL resolved to absolute | |
+
+
+---
+
+## ✅ Completion Record
+
+- **Completed:** 2026-04-13
+- **Final commit:** [commit hash from original buildout]
+- **Vercel deployment:** green
+- **Agents invoked:** architect, backend-agent, review-qa-agent
+- **Smoke tests:** [N of N] passing
+- **Notes:** Retired as part of 2026-04-20 housekeeping sweep. Content absorbed into platform CLAUDE.md and repo CLAUDE.md files. Preview API successfully built and deployed.
