@@ -73,8 +73,8 @@ API_KEYS={"ek_live_74qlNSbK5jTwq28Y":{"tier":"free","name":"Demo Key"},"ek_your_
 
 Mixes a "real-looking" key with a "placeholder" key. Pick one convention — I'd suggest all placeholders (`ek_placeholder_demo`, `ek_placeholder_yours`).
 
-### P3 — Rate-limit namespace is correct (`rl:preview:{tier}`)
-No fix needed. Flagging for completeness — Preview is one of three APIs (along with QR and Convert) using the correct namespace pattern.
+### P3 — Rate-limit namespace (updated Phase 8)
+Prefix renamed to `endpnt:ratelimit:preview:{tier}` / `endpnt:demo:preview:ratelimit` per platform standard. No further action needed.
 
 ### P4 — `JavaScript example code block has a horizontal scrollbar`
 **CIC audit finding.** Minor — CSS overflow issue in the JS code block on docs page, likely the long URL line wraps badly.

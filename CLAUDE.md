@@ -89,7 +89,7 @@ Do not fix this in a side task. Scope it as its own micro spec if you touch the 
 
 ## Rate-Limit Namespace
 
-Preview uses `rl:preview:{tier}` as the Upstash key prefix. This is correct and consistent with sibling APIs. Do NOT change.
+Preview uses `endpnt:ratelimit:preview:{tier}` as the Upstash key prefix for main auth, and `endpnt:demo:preview:ratelimit` for demo. These match the platform standard (standardized in Phase 8 of CC-SPEC-DEMO-PROXY-STANDARDIZATION.md). Do NOT change.
 
 Preview uses the `slidingWindow` algorithm (matching QR, Convert, Screenshot). Validate is the odd one out with `fixedWindow` — that's tracked as a separate future refactor.
 
