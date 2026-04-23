@@ -1,9 +1,10 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
-import { TIER_LIMITS, ApiTier } from './config'
+import { TIER_LIMITS, DEMO_RATE_LIMIT, ApiTier } from './config'
 
 let redis: Redis | null = null
 let rateLimiters: Record<ApiTier, Ratelimit> | null = null
+let demoRateLimit: Ratelimit | null = null
 
 function initializeRedis() {
   if (!redis) {
@@ -111,6 +112,61 @@ export async function checkRateLimit(
       remaining: TIER_LIMITS[tier].requests_per_minute,
       reset: Date.now() + 60000,
       limit: TIER_LIMITS[tier].requests_per_minute,
+    }
+  }
+}
+
+function initializeDemoRateLimit() {
+  if (!demoRateLimit) {
+    const redisInstance = initializeRedis()
+    if (!redisInstance) return null
+
+    demoRateLimit = new Ratelimit({
+      redis: redisInstance,
+      limiter: Ratelimit.slidingWindow(
+        DEMO_RATE_LIMIT.requests_per_window,
+        `${DEMO_RATE_LIMIT.window_minutes} m`
+      ),
+      analytics: true,
+      prefix: 'rl:preview:demo',
+    })
+  }
+  return demoRateLimit
+}
+
+export async function checkDemoRateLimit(
+  identifier: string
+): Promise<RateLimitResult> {
+  const limiter = initializeDemoRateLimit()
+
+  if (!limiter) {
+    // If Redis is not available, allow all requests
+    console.warn('Demo rate limiting disabled: Redis not available')
+    return {
+      allowed: true,
+      remaining: DEMO_RATE_LIMIT.requests_per_window,
+      reset: Date.now() + DEMO_RATE_LIMIT.window_minutes * 60 * 1000,
+      limit: DEMO_RATE_LIMIT.requests_per_window,
+    }
+  }
+
+  try {
+    const result = await limiter.limit(identifier)
+
+    return {
+      allowed: result.success,
+      remaining: result.remaining,
+      reset: result.reset,
+      limit: result.limit,
+    }
+  } catch (error) {
+    console.error('Demo rate limit check failed:', error)
+    // On error, allow the request but log the issue
+    return {
+      allowed: true,
+      remaining: DEMO_RATE_LIMIT.requests_per_window,
+      reset: Date.now() + DEMO_RATE_LIMIT.window_minutes * 60 * 1000,
+      limit: DEMO_RATE_LIMIT.requests_per_window,
     }
   }
 }

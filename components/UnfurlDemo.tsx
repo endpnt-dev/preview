@@ -33,11 +33,10 @@ export default function UnfurlDemo({ className = '' }: UnfurlDemoProps) {
     setResult(null)
 
     try {
-      const response = await fetch('/api/v1/unfurl', {
+      const response = await fetch('/api/demo/unfurl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'ek_live_74qlNSbK5jTwq28Y',
         },
         body: JSON.stringify({ url: url.trim() }),
       })

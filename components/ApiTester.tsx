@@ -29,7 +29,7 @@ export default function ApiTester({ className = '' }: ApiTesterProps) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'ek_live_74qlNSbK5jTwq28Y',
+          'x-api-key': '',
         },
         body: JSON.stringify({
           url: url.trim(),

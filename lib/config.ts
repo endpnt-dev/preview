@@ -32,6 +32,11 @@ export const VALIDATION_LIMITS = {
   max_redirects: { min: 0, max: 10 },
 }
 
+export const DEMO_RATE_LIMIT = {
+  requests_per_window: 20,
+  window_minutes: 10,
+}
+
 export const ERROR_CODES = {
   AUTH_REQUIRED: 'AUTH_REQUIRED',
   INVALID_API_KEY: 'INVALID_API_KEY',
@@ -42,6 +47,9 @@ export const ERROR_CODES = {
   TIMEOUT: 'TIMEOUT',
   TOO_MANY_REDIRECTS: 'TOO_MANY_REDIRECTS',
   INTERNAL_ERROR: 'INTERNAL_ERROR',
+  UNSUPPORTED_OPERATION: 'UNSUPPORTED_OPERATION',
+  ORIGIN_NOT_ALLOWED: 'ORIGIN_NOT_ALLOWED',
+  DEMO_UNAVAILABLE: 'DEMO_UNAVAILABLE',
 } as const
 
 // SSRF protection - private IP ranges to block

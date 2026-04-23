@@ -64,6 +64,9 @@ export function getErrorMessage(code: ErrorCode): string {
     TIMEOUT: 'Request timed out. The page took too long to respond.',
     TOO_MANY_REDIRECTS: 'Too many redirects. Maximum of 5 redirects allowed.',
     INTERNAL_ERROR: 'Internal server error. Please try again later.',
+    UNSUPPORTED_OPERATION: 'Unsupported operation. Check the endpoint documentation.',
+    ORIGIN_NOT_ALLOWED: 'Demo endpoint only accessible from the landing page.',
+    DEMO_UNAVAILABLE: 'Demo service temporarily unavailable.',
   }
   return messages[code]
 }
