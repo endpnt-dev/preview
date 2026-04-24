@@ -1,3 +1,5 @@
+> **⚠️ Security note (2026-04-24):** This file previously contained a live API key literal (C-008). The key has been revoked and is no longer active. Curl examples use `YOUR_API_KEY` — substitute a key retrieved from Vercel env.
+
 # Preview API — Code Review Findings (endpnt-dev/preview)
 **Reviewed by:** Opus (Claude chat) — cross-repo code review
 **Date:** April 17, 2026
@@ -21,9 +23,9 @@ Not a fix tonight. Informational only.
 ### M1 — Demo and docs testers hardcode non-existent API key
 **Files:** `components/ApiTester.tsx:32`, `components/UnfurlDemo.tsx:40`, `test-api.js:13`, `.env.local:2`
 
-Preview hardcodes `ek_live_74qlNSbK5jTwq28Y` in the frontend (Pattern A). Based on the CIC audit ("every request returns INVALID_API_KEY"), this key is NOT in the current `API_KEYS` env var on Preview's Vercel deployment.
+Preview hardcodes `YOUR_API_KEY` in the frontend (Pattern A). Based on the CIC audit ("every request returns INVALID_API_KEY"), this key is NOT in the current `API_KEYS` env var on Preview's Vercel deployment.
 
-Additionally, `.env.example` references a different key (`ek_live_74qlNSbK5jTwq28Y`) alongside `ek_your_key_here`, while `.env.local` uses yet another (`ek_live_demo123`). Three different "demo" values across the repo.
+Additionally, `.env.example` references a different key (`YOUR_API_KEY`) alongside `ek_your_key_here`, while `.env.local` uses yet another (`ek_live_demo123`). Three different "demo" values across the repo.
 
 **Recommended fix (short-term):** Pick ONE demo key value. Update hardcoded references in components. Update Vercel env var so that key actually resolves. Verify the landing demo works.
 
@@ -68,7 +70,7 @@ QR and Screenshot have prominent "Get started free" + "View docs" buttons in the
 **File:** `.env.example`
 
 ```
-API_KEYS={"ek_live_74qlNSbK5jTwq28Y":{"tier":"free","name":"Demo Key"},"ek_your_key_here":{"tier":"starter","name":"Your App"}}
+API_KEYS={"YOUR_API_KEY":{"tier":"free","name":"Demo Key"},"ek_your_key_here":{"tier":"starter","name":"Your App"}}
 ```
 
 Mixes a "real-looking" key with a "placeholder" key. Pick one convention — I'd suggest all placeholders (`ek_placeholder_demo`, `ek_placeholder_yours`).

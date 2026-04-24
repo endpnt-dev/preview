@@ -1,3 +1,10 @@
+// NOTE: API key rotated 2026-04-24 per C-008. Retrieve from Vercel env.
+const API_KEY = process.env.API_KEY
+if (!API_KEY) {
+  console.error('API_KEY env var not set. Run: API_KEY=<your-key> node test-api.js')
+  process.exit(1)
+}
+
 // Simple test script to verify the API is working
 const testUrl = 'https://github.com'
 
@@ -10,7 +17,7 @@ async function testUnfurlAPI() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': 'ek_live_74qlNSbK5jTwq28Y',
+        'x-api-key': API_KEY,
       },
       body: JSON.stringify({ url: testUrl }),
     })
