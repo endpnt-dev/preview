@@ -13,6 +13,8 @@ Preview unfurls URLs — fetches a web page, extracts OpenGraph/Twitter card/sch
 
 Input: a URL. Output: structured preview metadata in the standard response envelope.
 
+**See `BUGS.md` for current open bugs in this repo** (includes PR-001 content-length trust, PR-002 demo cold-start timeouts).
+
 ---
 
 ## Security — This API is the Reference for SSRF Protection
@@ -64,26 +66,9 @@ Read `node_modules/undici/types/dispatcher.d.ts` before extending. Undici return
 
 ---
 
-## Next.js Config — FIX REQUIRED
+## Next.js Config — Verified Correct (P-001 closed 2026-04-28)
 
-Current `next.config.js` uses `serverExternalPackages: ['cheerio']` at the top level with a comment "Updated from experimental to main config option." **This is Next 15 syntax. We're on Next 14.2.15.**
-
-Correct Next 14 syntax:
-
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['cheerio'],
-  },
-}
-
-module.exports = nextConfig
-```
-
-Whoever "updated" this was wrong — reverse it. Any build failures around cheerio bundling likely trace here.
-
-Do not fix this in a side task. Scope it as its own micro spec if you touch the config.
+`next.config.js` uses the correct Next 14 syntax — `experimental.serverComponentsExternalPackages: ['cheerio']`. The "FIX REQUIRED" note in a previous version of this file was stale; the config had already been corrected before the 2026-04-24 audit documented it as broken. No action needed.
 
 ---
 
